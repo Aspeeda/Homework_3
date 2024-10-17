@@ -83,26 +83,4 @@ public class CreateNewOrderTest extends BaseTest {
         String errorMessage = response.jsonPath().getString("message");
         assertEquals("Invalid Order", errorMessage, "Expected error message for invalid order data");
     }
-
-
-
-           /*petStoreApi.createUser(user1)
-                .statusCode(200)
-                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/CreateUser.json"))
-                .body("code", equalTo(200))
-                .body("type", equalTo("unknown"))
-                .body("message", equalTo("0"));*/
-
-       /* UserResponseDTO response = petStoreApi.createUser(user1)
-                .extract().body().as(UserResponseDTO.class);
-
-        Assertions.assertEquals(200L, response.getCode(), "Incorrect code");
-        Assertions.assertEquals("unknown", response.getType(), "Incorrect type");
-        Assertions.assertEquals("0", response.getMessage(), "Incorrect message");
-*/
-//        String actualMessage = createSpecs.createOrder(newOrder)
-//                .extract().body().jsonPath().get("message");
-
-//        Assertions.assertEquals("0", actualMessage, "Incorrect message");
-
 }
