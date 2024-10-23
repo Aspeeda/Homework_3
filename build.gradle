@@ -15,7 +15,7 @@ def junitVersion = "5.11.0",
     lombokVersion = "1.18.34",
     assetJVersion = "3.26.3",
     jacksonVersion = "2.18.0",
-    jsonValidatoorVersion = "5.5.0"
+    jsonValidatorVersion = "5.5.0"
 
 
 dependencies {
@@ -26,15 +26,17 @@ dependencies {
             "org.slf4j:slf4j-simple:$slf4jVersion",
             "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion",
             "org.projectlombok:lombok:$lombokVersion",
-            "io.rest-assured:json-schema-validator:$jsonValidatoorVersion"
+            "io.rest-assured:json-schema-validator:$jsonValidatorVersion"
     )
 
     compileOnly "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
 }
 
+
 tasks.withType(Test) {
     systemProperties(System.getProperties())
+    systemProperty 'baseUri', project.findProperty('baseUri') ?: 'https://petstore.swagger.io/v2'
     useJUnitPlatform()
 
     testLogging {

@@ -12,6 +12,7 @@ import static io.restassured.http.ContentType.JSON;
 public class LoginSpecs {
 
     public static RequestSpecification loginRequestSpec = with()
+            .baseUri(System.getProperty("baseUri"))
             .log().uri()
             .log().headers()
             .log().body()
@@ -27,5 +28,11 @@ public class LoginSpecs {
             .log(STATUS)
             .log(BODY)
             .expectStatusCode(400)
+            .build();
+
+    public static ResponseSpecification createUserResponse = new ResponseSpecBuilder()
+            .log(STATUS)
+            .log(BODY)
+            .expectStatusCode(200)
             .build();
 }

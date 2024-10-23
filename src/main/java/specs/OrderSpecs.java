@@ -8,13 +8,13 @@ import io.restassured.specification.RequestSpecification;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.with;
 
-public class CreateOrderSpecs {
+public class OrderSpecs {
 
-    private static final String BASE_URI = "https://petstore.swagger.io/v2";
+    private static final String BASE_URI = System.getProperty("baseUri");
     private static final String ORDER_PATH = "/store/order";
     private static RequestSpecification spec;
 
-    public CreateOrderSpecs() {
+    public OrderSpecs() {
         spec = with()
                 .baseUri(BASE_URI)
                 .contentType(ContentType.JSON)
@@ -28,6 +28,28 @@ public class CreateOrderSpecs {
                 .body(OrderDTO)
                 .when()
                 .post()
+                .then()
+                .log().all();
+    }
+
+    public static ValidatableResponse deleteOrder(int orderId) {
+
+        return given(spec)
+                .basePath(ORDER_PATH)
+                .pathParam("orderId", orderId)
+                .when()
+                .delete("/{orderId}")
+                .then()
+                .log().all();
+    }
+
+    public static ValidatableResponse getOrderById(int orderId) {
+
+        return given(spec)
+                .basePath(ORDER_PATH)
+                .pathParam("orderId", orderId)
+                .when()
+                .get("/{orderId}")
                 .then()
                 .log().all();
     }
